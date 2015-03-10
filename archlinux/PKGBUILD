@@ -12,11 +12,10 @@ optdepends=()
 source=(http://registry.npmjs.org/$_npmname/-/$_npmname-$pkgver.tgz)
 noextract=($_npmname-$pkgver.tgz)
 sha1sums=('6c6336c43e76b13c7ce29f96898c8bdf4e1e38fa')
+
 package() {
-  cd $srcdir
-  local _npmdir="$pkgdir/usr/lib/node_modules/"
-  mkdir -p $_npmdir
-  cd $_npmdir
-  npm install -g --prefix "$pkgdir/usr" $_npmname@$pkgver
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  npm install --user root --global --prefix "${pkgdir}/usr" .
 }
+
 # vim:set ts=2 sw=2 et:

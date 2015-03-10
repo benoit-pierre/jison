@@ -6,7 +6,9 @@ set -x
 
 cd "$(dirname "$0")" &&
 . ./PKGBUILD &&
-# pkgver="$(git describe --tags --match='[0-9]*' | sed -n '/^[0-9][.0-9a-z-]\+$/{s/-/./g;p;Q0};Q1')" &&
+pkgver="$(python2 -c "import json; print json.load(open('../package.json'))['version']")" &&
+verrev="$(git blame -L '/^\s*"version": /,+1' -l ../package.json | cut -c -40)" &&
+pkgver="$pkgver.$(git rev-list --count "$verrev..").$(git log -1 --pretty='format:%h')" &&
 src="src/$pkgname-$pkgver" &&
 rm -rf src pkg &&
 mkdir -p "$src" &&
