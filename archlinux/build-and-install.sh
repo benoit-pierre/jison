@@ -17,5 +17,5 @@ sed "s/^pkgver=.*\$/pkgver=$pkgver/" PKGBUILD >PKGBUILD.tmp &&
 export PACKAGER="${PACKAGER:-`git config user.name` <`git config user.email`>}" &&
 makepkg --noextract --force -p PKGBUILD.tmp &&
 rm -rf src pkg PKGBUILD.tmp &&
-sudo pacman -U --noconfirm "$pkgname-$pkgver-$pkgrel-`uname -m`${PKGEXT:-.pkg.tar.xz}"
+sudo pacman -U --noconfirm "$pkgname-$pkgver-$pkgrel-any${PKGEXT:-.pkg.tar.xz}"
 
